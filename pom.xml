@@ -31,6 +31,7 @@
       <distribution.artifact>target/distribution/${distribution.name}</distribution.artifact>
       <plugins.chm/>
       <plugins.ehcache/>
+      <plugins.geode/>
       <plugins.hazelcast/>
       <plugins.jbosscache/>
       <plugins.jgroups/>
@@ -164,6 +165,20 @@
          </modules>
          <properties>
             <plugins.hazelcast>hazelcast2,hazelcast3</plugins.hazelcast>
+         </properties>
+      </profile>
+      <profile>
+         <id>geode</id>
+         <activation>
+            <property>
+               <name>!no-geode</name>
+            </property>
+         </activation>
+         <modules>
+            <module>plugins/geode</module>
+         </modules>
+         <properties>
+            <plugins.geode>geode</plugins.geode>
          </properties>
       </profile>
       <profile>
@@ -533,7 +548,7 @@
                         </path>
 
                         <echo message="Packaging plugins: " />
-                        <ac:for list="${plugins.chm},${plugins.ehcache},${plugins.hazelcast},${plugins.http},${plugins.jbosscache},${plugins.jgroups},${plugins.infinispan},${plugins.jdk18},${plugins.jdg},${plugins.jdg70},${plugins.coherence},${plugins.process},${plugins.resteasy-http},${plugins.spymemcached}" param="plugin" xmlns:ac="antlib:net.sf.antcontrib">
+                        <ac:for list="${plugins.chm},${plugins.ehcache},${plugins.geode},${plugins.hazelcast},${plugins.http},${plugins.jbosscache},${plugins.jgroups},${plugins.infinispan},${plugins.jdk18},${plugins.jdg},${plugins.jdg70},${plugins.coherence},${plugins.process},${plugins.resteasy-http},${plugins.spymemcached}" param="plugin" xmlns:ac="antlib:net.sf.antcontrib">
                            <sequential>
                               <echo message="Packaging plugin @{plugin}..." />
                               <ac:if>
